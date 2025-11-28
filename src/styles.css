@@ -1,0 +1,101 @@
+:root {
+    --bs-primary: #60269f;
+    --bs-primary-rgb: 96, 38, 159;
+
+    --switch-track-bg: rgba(15, 23, 42, 0.06);
+    --switch-track-border: rgba(15, 23, 42, 0.12);
+    --switch-ball: #ffffff;
+    --switch-icon-active: #facc15;
+    --switch-icon-inactive: #6b7280;
+}
+
+[data-bs-theme="dark"] {
+    --switch-track-bg: rgba(15, 23, 42, 0.75);
+    --switch-track-border: rgba(148, 163, 184, 0.6);
+    --switch-ball: #e5e7eb;
+    --switch-icon-active: #facc15;
+    --switch-icon-inactive: #9ca3af;
+}
+
+.navbar {
+    border-radius: 2rem;
+}
+
+.theme-switch {
+    display: flex;
+    align-items: center;
+}
+
+.theme-switch-input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.theme-switch-label {
+    width: 52px;
+    height: 28px;
+    border-radius: 999px;
+    position: relative;
+    padding: 4px 6px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+
+    background-color: var(--switch-track-bg);
+    border: 1px solid var(--switch-track-border);
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.theme-switch-label .fa-sun,
+.theme-switch-label .fa-moon {
+    font-size: 0.75rem;
+    z-index: 2;
+    transition: opacity 0.2s ease, color 0.2s ease;
+}
+
+.theme-switch-label .ball {
+    background-color: var(--switch-ball);
+    width: 20px;
+    height: 20px;
+    border-radius: 999px;
+    position: absolute;
+    left: 3px;
+    top: 3px;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+    z-index: 1;
+    box-shadow: 0 1px 3px rgba(15, 23, 42, 0.3);
+}
+
+/* ČEKIRANO = DARK TEMA (mesec aktivan desno) */
+.theme-switch-input:checked+.theme-switch-label .ball {
+    transform: translateX(22px);
+}
+
+/* Stanja ikonica */
+.theme-switch-input:checked+.theme-switch-label .fa-moon {
+    opacity: 1;
+    color: var(--switch-icon-active);
+}
+
+.theme-switch-input:checked+.theme-switch-label .fa-sun {
+    opacity: 0.3;
+    color: var(--switch-icon-inactive);
+}
+
+.theme-switch-input:not(:checked)+.theme-switch-label .fa-sun {
+    opacity: 1;
+    color: var(--switch-icon-active);
+}
+
+.theme-switch-input:not(:checked)+.theme-switch-label .fa-moon {
+    opacity: 0.3;
+    color: var(--switch-icon-inactive);
+}
+
+
+#logo {
+    max-width: 200px;
+}
