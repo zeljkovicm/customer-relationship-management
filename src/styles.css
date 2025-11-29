@@ -100,7 +100,20 @@
     margin-bottom: auto;
 }
 
+#profileMenu {
+    border-radius: 1.5rem;
+}
 
 #logo {
     max-width: 200px;
+}
+
+.my-dropdown .dropdown-item {
+    text-align: center !important;
+
+}
+
+.my-dropdown {
+    border-radius: 1.5rem !important;
+    overflow: hidden;
 }

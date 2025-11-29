@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { RouterLink } from "@angular/router";
-import { AuthService, SignupRequest } from '../services/auth.service';
+import { Route, Router, RouterLink } from "@angular/router";
+import { AuthService, LoginResponse, SignupRequest, SignupResponse } from '../services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -16,7 +16,7 @@ export class Login {
 
   loginForm!: FormGroup
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]]
@@ -24,6 +24,12 @@ export class Login {
   }
 
   onSubmit() {
+
+    if (this.loginForm.invalid) {
+      this.loginForm.markAllAsTouched()
+      return
+    }
+
     const data = this.loginForm.value
 
     const payload = {
@@ -32,17 +38,20 @@ export class Login {
     }
 
     this.authService.login(payload).subscribe({
-      next: (res) => {
+      next: (res: LoginResponse) => {
         Swal.fire({
-          title: "You've logged in successfully!",
+          title: "Loggin successful",
           icon: "success",
+          text: `Welcome back, ${res.user.firstName} ${res.user.lastName}`,
           draggable: true
-        })
+        }),
+          this.router.navigateByUrl('/')
       },
       error: (err) => {
         Swal.fire({
-          title: "Login failed!",
+          title: "Loggin unsuccessful",
           icon: "error",
+          text: err.error?.detail,
           draggable: true
         })
       }

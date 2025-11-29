@@ -8,13 +8,28 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
+          <a class="nav-link active" aria-current="page" routerLink="/">Home</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
+          <a class="nav-link active" aria-current="page" routerLink="/about">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/members">Members</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/contact">Contact</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/customers">Customers</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/bundles">Bundles</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" routerLink="/meetings">Meetings</a>
         </li>
       </ul>
-      <div class="d-flex">
+      <div class="d-flex align-items-center">
         <div class="form-check theme-switch ms-auto" id="switch">
           <input type="checkbox" class="form-check-input theme-switch-input" id="themeToggle">
           <label for="themeToggle" class="form-check-label theme-switch-label">
@@ -23,8 +38,26 @@
             <span class="ball"></span>
           </label>
         </div>
+
+        @if (currentUser$ | async; as user) {
+        <div class="dropdown ms-3">
+          <button class="btn btn-outline-secondary dropdown-toggle" data-bs-toggle="dropdown" id="profileMenu">
+            <i class="fas fa-user me-1"></i>
+            {{ user.firstName }} {{ user.lastName }}
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end my-dropdown">
+            <li><a class="dropdown-item" routerLink="/profile">Profile <i class="fa-solid fa-id-badge"></i></a></li>
+            <li>
+              <hr class="dropdown-divider" />
+            </li>
+            <li><button class="dropdown-item" (click)="onLogout()">Logout <i
+                  class="fa-solid fa-right-from-bracket"></i></button></li>
+          </ul>
+        </div>
+        } @else {
         <button class="btn btn-brand mx-2" routerLink="/signup">Signup</button>
-        <button class=" btn btn-brand mx-2" routerLink="/login">Login</button>
+        <button class="btn btn-brand mx-2" routerLink="/login">Login</button>
+        }
       </div>
     </div>
   </div>
