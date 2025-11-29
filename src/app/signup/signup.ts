@@ -1,12 +1,14 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormGroup, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { RouterLink } from "@angular/router";
+import { AuthService, SignupRequest } from '../services/auth.service';
 import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './signup.html',
   styleUrl: './signup.css',
 })
@@ -15,7 +17,7 @@ export class Signup {
 
   signupForm!: FormGroup // bice inicijalizovana kasnije
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService) {
     this.signupForm = this.fb.group({
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
@@ -36,7 +38,33 @@ export class Signup {
     return password === confirmPassword ? null : { passwordsMismatch: true }
   }
 
-  onSubmit() { }
+  onSubmit() {
+    const data = this.signupForm.value
+
+    const payload = {
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password
+    }
+
+    this.authService.signup(payload).subscribe({
+      next: (res) => {
+        Swal.fire({
+          title: "You've signed up successfully!",
+          icon: "success",
+          draggable: true
+        })
+      },
+      error: (err) => {
+        Swal.fire({
+          title: "Signup failed!",
+          icon: "error",
+          draggable: true
+        })
+      }
+    })
+  }
 
 
 }

@@ -95,6 +95,11 @@
     color: var(--switch-icon-inactive);
 }
 
+#switch {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
 
 #logo {
     max-width: 200px;

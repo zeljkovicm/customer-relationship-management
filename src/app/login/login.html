@@ -1,1 +1,74 @@
-<p>login works!</p>
+<div class="container mt-4">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-12 col-xl-11">
+            <div class="card text-black" style="border-radius: 2rem;">
+                <div class="card-body">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10 col-lg-6 col-xl-5 order-2 order-lg-1">
+
+                            <p class="text-center h1 fw-bold mx-1 mx-md-4 p-md-3">Log in</p>
+
+                            <form class="mx-1 mx-md-4" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                                <div class="d-flex flex-row align-items-center">
+                                    <i class="fas fa-envelope fa-lg me-3 fa-fw"></i>
+                                    <div class="form-floating mb-3 w-100">
+                                        <input type="email" class="form-control form-control-sm" id="email"
+                                            formControlName="email" [ngClass]="{
+                                                'is-invalid': loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+                                            }">
+                                        <label for="email">Email</label>
+                                        <div class="invalid-feedback">
+                                            Please enter your @ncrvoyix email
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex flex-row align-items-center position-relative">
+                                    <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
+
+                                    <div class="form-floating mb-3 password-wrapper w-100">
+                                        <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                                            id="password" formControlName="password" [ngClass]="{
+                                            'is-invalid':
+                                              loginForm.get('password')?.invalid &&
+                                              loginForm.get('password')?.touched
+                                          }" />
+                                        <label for="password">Enter your password</label>
+
+                                        <div class="invalid-feedback">
+                                            Please enter your password
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <i class="fas password-eye" [ngClass]="showPassword ? 'fa-eye' : 'fa-eye-slash'"
+                                        (click)="showPassword = !showPassword"></i>
+                                </div>
+
+                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <button type="submit" data-mdb-button-init data-mdb-ripple-init
+                                        class="btn btn-primary btn-lg" [disabled]="loginForm.invalid">Log in</button>
+                                </div>
+
+                                <div class="d-flex justify-content-center mx-4 mb-3 mb-lg-4">
+                                    <p><a class="link-opacity-50" routerLink="/signup">Sign up here
+                                            here.</a></p>
+                                </div>
+
+                            </form>
+
+                        </div>
+                        <div class="col-md-10 col-lg-6 col-xl-7 d-flex align-items-center order-1 order-lg-2">
+
+                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-registration/draw1.webp"
+                                class="img-fluid" alt="Sample image">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

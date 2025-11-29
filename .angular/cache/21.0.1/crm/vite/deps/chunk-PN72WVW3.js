@@ -3255,21 +3255,6 @@ var PlatformNavigation = class _PlatformNavigation {
   }], null, null);
 })();
 
-// node_modules/@angular/common/fesm2022/_xhr-chunk.mjs
-function parseCookieValue(cookieStr, name) {
-  name = encodeURIComponent(name);
-  for (const cookie of cookieStr.split(";")) {
-    const eqIndex = cookie.indexOf("=");
-    const [cookieName, cookieValue] = eqIndex == -1 ? [cookie, ""] : [cookie.slice(0, eqIndex), cookie.slice(eqIndex + 1)];
-    if (cookieName.trim() === name) {
-      return decodeURIComponent(cookieValue);
-    }
-  }
-  return null;
-}
-var XhrFactory = class {
-};
-
 // node_modules/@angular/common/fesm2022/common.mjs
 var NavigationAdapterForLocation = class _NavigationAdapterForLocation extends Location {
   navigation = inject(PlatformNavigation);
@@ -4608,8 +4593,6 @@ export {
   SlicePipe,
   CommonModule,
   PlatformNavigation,
-  parseCookieValue,
-  XhrFactory,
   NavigationAdapterForLocation,
   registerLocaleData2 as registerLocaleData,
   PLATFORM_BROWSER_ID,
@@ -4628,4 +4611,4 @@ export {
   PRECONNECT_CHECK_BLOCKLIST,
   NgOptimizedImage
 };
-//# sourceMappingURL=chunk-6CBNMMMN.js.map
+//# sourceMappingURL=chunk-PN72WVW3.js.map
